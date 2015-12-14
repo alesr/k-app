@@ -70,11 +70,21 @@ angular.module('k-app', ['ionic', 'k-app.controllers', 'k-app.services', 'ngCord
     }
   })
 
-  .state('tab.cidehus', {
-    url: '/bars/cidehus',
+  .state('tab.page', {
+    url: '/bars/page',
     views: {
       'tab-bars': {
-        templateUrl: 'templates/cidehus.html',
+        templateUrl: 'templates/page.html',
+        controller: 'SideContentCtrl'
+      }
+    }
+  })
+
+  .state('tab.photo', {
+    url: '/bars/photo',
+    views: {
+      'tab-bars': {
+        templateUrl: 'templates/photo.html',
         controller: 'SideContentCtrl'
       }
     }

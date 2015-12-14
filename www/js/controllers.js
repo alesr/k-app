@@ -10,11 +10,11 @@ angular.module('k-app.controllers', [])
 
 .controller('SideContentCtrl', function($scope, $state) {
   $scope.goToCidehus = function() {
-    $state.go('tab.cidehus');
+    $state.go('tab.page');
   };
 
   $scope.goToOptions = function() {
-    alert("opening options page");
+    $state.go('tab.photo');
   };
 })
 
@@ -29,7 +29,7 @@ angular.module('k-app.controllers', [])
 .controller('MapCtrl', function($scope, $stateParams, $cordovaGeolocation, $state, Bars) {
 
   var position;
-  
+
   var getCurrentPositionSuccess = function(position) {
     position = [position.coords.latitude, position.coords.longitude];
     map(position);
