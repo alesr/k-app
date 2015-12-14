@@ -1,5 +1,11 @@
 <ion-view>
-  <ion-content class="padding">
-    <h1>Take a picture</h1>
-  </ion-content>
+    <ion-content ng-controller="PhotoCtrl" padding="true" class="padding">
+      <button class="button button-full button-assertive" ng-click="takePhoto()">
+        Take Photo
+      </button>
+      <button class="button button-full button-assertive" ng-click="choosePhoto()">
+        Choose Photo
+      </button>
+      <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}" style="text-align: center">
+    </ion-content>
 </ion-view>

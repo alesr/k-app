@@ -1,5 +1,22 @@
 angular.module('k-app.controllers', [])
 
+.factory('Camera', ['$q', function($q) {
+  return {
+    getPicture: function(options) {
+      var q = $q.defer();
+
+      navigator.camera.getPicture(function(result) {
+        // Do any magic you need
+        q.resolve(result);
+      }, function(err) {
+        q.reject(err);
+      }, options);
+
+      return q.promise;
+    }
+  }
+}])
+
 .controller('BarsCtrl', function($scope, $stateParams, $state, Bars) {
   $scope.bars = Bars.all();
   $scope.driveMeThere = function(id) {
@@ -17,6 +34,49 @@ angular.module('k-app.controllers', [])
     $state.go('tab.photo');
   };
 })
+
+.controller("PhotoCtrl", function ($scope, $cordovaCamera) {
+
+  $scope.takePhoto = function () {
+    var options = {
+      quality: 75,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 300,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false
+    };
+
+    $cordovaCamera.getPicture(options).then(function (imageData) {
+      $scope.imgURI = "data:image/jpeg;base64," + imageData;
+    }, function (err) {
+      // An error occured. Show a message to the user
+    });
+  }
+
+    $scope.choosePhoto = function () {
+      var options = {
+        quality: 75,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 300,
+        targetHeight: 300,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false
+      };
+
+      $cordovaCamera.getPicture(options).then(function (imageData) {
+          $scope.imgURI = "data:image/jpeg;base64," + imageData;
+      }, function (err) {
+          // An error occured. Show a message to the user
+      });
+    }
+  })
 
 .controller('BarDetailCtrl', function($scope, $stateParams, Bars) {
   $scope.bar = Bars.get($stateParams.barId);
