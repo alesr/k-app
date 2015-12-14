@@ -1,0 +1,13 @@
+<ion-view view-title="CIDEHUS - ROTAS DIGITAIS">
+  <ion-content>
+    <!-- <img src="../img/logo.png"/> -->
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right tabs-back" ng-repeat="bar in bars" type="item-text-wrap" href="#/tab/bars/{{bar.id}}">
+        <h2 style="color: white; text-align: center;">{{bar.name}}</h2>
+        <ion-option-button class="button-assertive" ng-click="driveMeThere({{bar.id}})" style="background-color: #9e1b33;">
+          Leve-me lá!
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
